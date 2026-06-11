@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(13deg, #0F172A 0%, #1E293B 100%);
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-container {
+  width: 400px;
+  height: 600px;
+  background: #FFFFFF;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 20px;
+  background: linear-gradient(90deg, #38BDF8 0%, #2563EB 100%);
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* AI message - lightning shape */
+.ai-msg {
+  background: rgba(115, 0, 255, 0.815);  
+  border-left: 3px solid #7200ff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  padding: 12px 18px;
+  border-radius: 5px 20px 20px 20px;
+  align-self: flex-start;
+  max-width: 75%;
+  box-shadow: 0 0 10px rgba(115, 0, 255, 0.582);  /* receive box shadow color */
+}
+
+/* User message - leaf shape */
+.user-msg {
+  background: rgba(115, 0, 255, 0.815);
+  border-right: 3px solid #7200ff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  padding: 12px 18px;
+  border-radius: 20px 5px 20px 20px;
+  align-self: flex-end;
+  max-width: 75%;
+  box-shadow: 0 0 10px rgba(115, 0, 255, 0.582);/* send box shadow color */
+}
+
+/* Thinking animation */
+.thinking {
+  border-radius: 5px 20px 20px 20px;
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  background: rgba(115, 0, 255, 0.815);
+  border-right: 3px solid #7200ff;
+  color: #FFFFFF;
+  font-size: 15px;
+  width: fit-content;
+  align-self: flex-start;
+  box-shadow: 0 0 10px rgba(115, 0, 255, 0.582); /* box shadow color */
+}
+.thinking span {
+  width: 8px;  /* sizing of dots */
+  height: 8px;
+  background: #FFFFFF; /* span Dots  */
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+}
+.thinking span:nth-child(2) { animation-delay: 0.2s; }
+.thinking span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+ 0%, 60%, 100% { transform: translateY(0); }   /* At start 60%, end: dot stays at normal position */
+ 30% { transform: translateY(-8px); }  /* 30% of animation time: dot moves 8px up */
+}
+
+.input-area {
+  display: flex;
+  padding: 16px;
+  gap: 10px;
+  background: #FFFFFF;
+  border-top: 1px solid #E2E8F0;
+}
+
+input {
+  flex: 1;
+  height: 48px;
+  padding: 0 18px;
+  background: #FFFFFF; /* Input background color*/
+  border: 1.5px solid gray;
+  border-radius: 24px;
+  color: #1E293B;  /*text color*/
+  outline: none;
+  transition: all 0.3s;
+  font-size: 16px;
+  font-weight: 500;
+}
+input:focus {
+  border-color: #6366F1;   /* border color on click */
+  box-shadow: 0 0 3px rgba(99, 102, 241, 0.1);   /* glow color */
+}
+input::placeholder{
+    color: #94A3B8;
+}
+
+/* LEFT CORNER SIDEBAR */
+.sidebar {
+    width: 350px;
+    background: #202123;
+    color: white;  /* text color */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    /* setted Corner side  */
+    position: fixed;   /* Screen fix */
+    top: 0;            /* In corner */
+    left: 0;           /* Left corner */
+    height: 100vh;     /* Full height */
+    z-index: 1000;     /* In top elements overlap */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* left shadow */
+}
+
+/* Chat container in left side, "Else the sidebar will get pushed down */
+/*
+.chat-container {
+    flex: 1;
+    margin-left: 350px; /* Margin same as sidebar width
+    display: flex;
+    flex-direction: column;
+    background: white;
+    height: 100vh;
+*/
+
+/* Mobile sidebar hide + margin */
+@media (max-width: 768px) {
+   .sidebar {
+        display: none;
+    }
+   .chat-container {
+        margin-left: 0;
+    }
+}
+
+/* sidebar new button and chat history*/
+.sidebar h2 {
+    padding: 15px 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 10px;
+}
+
+.new-chat-btn {
+    background: #444;
+    color: white;
+    border: 1px solid #555;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.new-chat-btn:hover {
+    background: #555;
+}
+
+.chat-history {
+    flex: 1;
+    overflow-y: auto;
+}
+.chat-item {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-item:hover {
+    background: #2a2b32;
+}
+
+button {
+  height: 48px;
+  padding: 0 22px;
+  background: rgba(115, 0, 255, 0.815);
+  border-right: 24px solid #7200ff;;
+  border: none;
+  background: linear-gradient(136deg, 6366F1 0%, #8B5CF6 100%);
+  border-radius: 16px;
+  color: #FFFFFF;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(115, 0, 255, 0.582);
+}
+
+/* Dark scrollbar */
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+}
