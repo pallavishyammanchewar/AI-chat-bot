@@ -64,3 +64,6 @@ Open `script.js` and replace these 2 lines at the top:
 const API_KEY = "API Key"; // Gemini key using google ai studio
 const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}"; // API url
 
+Video Link:-
+https://youtu.be/hYhCuTnWghI
+
